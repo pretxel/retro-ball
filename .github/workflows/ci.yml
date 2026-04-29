@@ -1,0 +1,59 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm typecheck
+      - run: pnpm lint
+      - run: pnpm test
+
+      - uses: supabase/setup-cli@v1
+        with:
+          version: latest
+
+      - run: supabase start
+      - run: supabase db reset --no-seed
+      - run: supabase test db
+
+      - name: Read Supabase anon key
+        id: supa
+        run: |
+          ANON_KEY=$(supabase status -o env | grep ANON_KEY | cut -d= -f2 | tr -d '"')
+          echo "anon_key=$ANON_KEY" >> "$GITHUB_OUTPUT"
+
+      - name: Install Playwright
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Check for E2E specs
+        id: e2e_check
+        run: |
+          if compgen -G "tests/e2e/*.spec.ts" > /dev/null; then
+            echo "has_specs=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_specs=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Run E2E tests
+        if: steps.e2e_check.outputs.has_specs == 'true'
+        run: pnpm test:e2e
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: http://127.0.0.1:54321
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ steps.supa.outputs.anon_key }}
