@@ -7,6 +7,7 @@ on:
 jobs:
   build-test:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
 
@@ -30,17 +31,15 @@ jobs:
           version: latest
 
       - run: supabase start
+        timeout-minutes: 8
       - run: supabase db reset --no-seed
       - run: supabase test db
 
       - name: Read Supabase anon key
         id: supa
         run: |
-          ANON_KEY=$(supabase status -o env | grep ANON_KEY | cut -d= -f2 | tr -d '"')
+          ANON_KEY=$(supabase status -o env | grep ^ANON_KEY= | cut -d= -f2-)
           echo "anon_key=$ANON_KEY" >> "$GITHUB_OUTPUT"
-
-      - name: Install Playwright
-        run: pnpm exec playwright install --with-deps chromium
 
       - name: Check for E2E specs
         id: e2e_check
@@ -50,6 +49,10 @@ jobs:
           else
             echo "has_specs=false" >> "$GITHUB_OUTPUT"
           fi
+
+      - name: Install Playwright
+        if: steps.e2e_check.outputs.has_specs == 'true'
+        run: pnpm exec playwright install --with-deps chromium
 
       - name: Run E2E tests
         if: steps.e2e_check.outputs.has_specs == 'true'
