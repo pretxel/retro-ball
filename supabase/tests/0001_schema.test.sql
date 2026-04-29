@@ -1,0 +1,12 @@
+begin;
+select plan(8);
+select has_table('public', 'rooms', 'rooms exists');
+select has_table('public', 'participants', 'participants exists');
+select has_table('public', 'cards', 'cards exists');
+select has_table('public', 'votes', 'votes exists');
+select col_is_unique('public', 'rooms', array['code'], 'room.code unique');
+select fk_ok('public', 'cards', 'room_id', 'public', 'rooms', 'id');
+select fk_ok('public', 'votes', 'card_id', 'public', 'cards', 'id');
+select col_type_is('public'::name, 'rooms'::name, 'votes_per_user'::name, 'integer'::name);
+select * from finish();
+rollback;
