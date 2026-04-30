@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Fraunces, DM_Sans, JetBrains_Mono } from "next/font/google";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -24,6 +25,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://retro-ball.app";
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 const SITE_NAME = "Retro Ball";
 const DESCRIPTION =
   "Live realtime Mad/Sad/Glad retrospective board for agile teams. Share a 6-digit room code, write cards, vote, and discuss — no accounts, no setup, ephemeral 24-hour rooms.";
@@ -111,6 +113,7 @@ export default function RootLayout({
         />
         {children}
       </body>
+      {GA_ID ? <GoogleAnalytics gaId={GA_ID} /> : null}
     </html>
   );
 }
