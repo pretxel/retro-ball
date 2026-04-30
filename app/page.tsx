@@ -2,8 +2,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { createRoomAction } from '@/lib/rpc/createRoom';
 import { redirect } from 'next/navigation';
+import { CreateRoomForm } from './_components/CreateRoomForm';
 
 async function joinFromLanding(formData: FormData): Promise<void> {
   'use server';
@@ -19,13 +19,7 @@ export default function HomePage() {
         <Card>
           <CardHeader><CardTitle>Start a retro</CardTitle></CardHeader>
           <CardContent>
-            <form action={createRoomAction} className="grid gap-3">
-              <div className="grid gap-1">
-                <Label htmlFor="displayName">Your name</Label>
-                <Input id="displayName" name="displayName" required maxLength={40} />
-              </div>
-              <Button type="submit">Create room</Button>
-            </form>
+            <CreateRoomForm />
           </CardContent>
         </Card>
         <Card>
