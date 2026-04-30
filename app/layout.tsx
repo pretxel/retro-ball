@@ -23,9 +23,48 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://retro-ball.app";
+const SITE_NAME = "Retro Ball";
+const DESCRIPTION =
+  "Live realtime Mad/Sad/Glad retrospective board for agile teams. Share a 6-digit room code, write cards, vote, and discuss — no accounts, no setup, ephemeral 24-hour rooms.";
+
 export const metadata: Metadata = {
-  title: "Retro Ball",
-  description: "Run an honest retro with your team. No accounts, no clutter, ephemeral.",
+  metadataBase: new URL(SITE_URL),
+  title: { default: SITE_NAME, template: "%s · Retro Ball" },
+  description: DESCRIPTION,
+  applicationName: SITE_NAME,
+  authors: [{ name: "Retro Ball" }],
+  keywords: [
+    "retrospective",
+    "agile retrospective",
+    "scrum retro",
+    "mad sad glad",
+    "team retro",
+    "realtime collaboration",
+    "online retro tool",
+    "free retro tool",
+    "anonymous retro",
+  ],
+  category: "productivity",
+  openGraph: {
+    type: "website",
+    url: SITE_URL,
+    siteName: SITE_NAME,
+    title: SITE_NAME,
+    description: DESCRIPTION,
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary",
+    title: SITE_NAME,
+    description: DESCRIPTION,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-snippet": -1, "max-image-preview": "large" },
+  },
+  alternates: { canonical: SITE_URL },
 };
 
 export default function RootLayout({
@@ -46,6 +85,30 @@ export default function RootLayout({
           <span className="riso-blob riso-blob--4" />
           <span className="riso-blob riso-blob--5" />
         </div>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebApplication",
+              name: SITE_NAME,
+              url: SITE_URL,
+              description: DESCRIPTION,
+              applicationCategory: "BusinessApplication",
+              operatingSystem: "Web",
+              offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+              featureList: [
+                "Live realtime card sync",
+                "Mad/Sad/Glad retrospective format",
+                "Dot voting with configurable per-user limit",
+                "Anonymous mode with facilitator-controlled reveal",
+                "Countdown timer",
+                "Ephemeral 24-hour rooms",
+                "No account required, join with 6-digit code",
+              ],
+            }),
+          }}
+        />
         {children}
       </body>
     </html>
