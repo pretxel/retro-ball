@@ -16,7 +16,6 @@ export default function HomePage() {
     <main className="min-h-screen flex flex-col px-6 py-10 md:py-16">
       <div className="mx-auto w-full max-w-5xl flex-1 flex flex-col">
         <header className="mb-12 md:mb-16">
-          <p className="riso-caps text-[0.72rem] text-[var(--accent)] mb-4">A risograph for retros</p>
           <h1 className="riso-display text-[18vw] md:text-[10rem] leading-[0.85] tracking-[-0.04em]">
             <span className="block">Retro</span>
             <span className="block italic text-[var(--accent)]" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 100, "WONK" 1' }}>

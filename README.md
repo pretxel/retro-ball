@@ -71,6 +71,3 @@ Key boundaries:
 - Postgres RPCs are the single mutation surface — RLS denies direct table writes.
 - `lib/identity.ts` is the only owner of the participant cookie.
 
-## License
-
-MIT (placeholder).
