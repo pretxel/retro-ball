@@ -4,6 +4,8 @@ import { useRoomState } from '@/lib/realtime/useRoomState';
 import { Column } from './Column';
 import { Timer } from './Timer';
 import { TimerControls } from '@/components/facilitator/TimerControls';
+import { ParticipantsList } from './ParticipantsList';
+import { FacilitatorPanel } from '@/components/facilitator/FacilitatorPanel';
 
 const TITLES = { mad: 'Mad', sad: 'Sad', glad: 'Glad' } as const;
 
@@ -32,11 +34,20 @@ export function Board({ roomId, viewerId }: { roomId: string; viewerId: string }
           <TimerControls participantId={viewerId} isFacilitator={room.facilitator_id === viewerId} />
         </div>
       </header>
-      <section className="grid gap-4 md:grid-cols-3" aria-live="polite">
-        {(['mad', 'sad', 'glad'] as const).map((k) => (
-          <Column key={k} title={TITLES[k]} columnKey={k} cards={cardsByColumn[k]} viewerId={viewerId} />
-        ))}
-      </section>
+      <div className="grid gap-4 md:grid-cols-[1fr_280px]">
+        <section className="grid gap-4 md:grid-cols-3" aria-live="polite">
+          {(['mad', 'sad', 'glad'] as const).map((k) => (
+            <Column key={k} title={TITLES[k]} columnKey={k} cards={cardsByColumn[k]} viewerId={viewerId} />
+          ))}
+        </section>
+        <aside className="space-y-4">
+          <div className="bg-white rounded-lg shadow-sm p-4">
+            <h3 className="font-medium mb-2">Participants</h3>
+            <ParticipantsList />
+          </div>
+          <FacilitatorPanel participantId={viewerId} />
+        </aside>
+      </div>
     </main>
   );
 }
