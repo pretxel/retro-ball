@@ -66,6 +66,9 @@ export default function HomePage() {
           <p className="riso-caps text-[0.65rem] text-[color-mix(in_oklab,var(--ink)_55%,transparent)]">
             All rooms expire after 24 hours of silence.
           </p>
+          <p className="riso-caps mt-2 text-[0.65rem] text-[color-mix(in_oklab,var(--ink)_55%,transparent)]">
+            Made with ❤️ | 2026 | pretxel
+          </p>
         </footer>
       </div>
     </main>
