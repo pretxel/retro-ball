@@ -14,11 +14,17 @@ export function RevealAuthorsToggle({ participantId }: { participantId: string }
     try { await revealAuthors({ participantId }); }
     catch (e) { setError(toToast((e as { code?: string }).code)); }
   };
-  if (room.authors_revealed) return <span className="text-sm text-zinc-500">Authors revealed</span>;
+  if (room.authors_revealed) {
+    return (
+      <p className="riso-caps text-xs text-[color-mix(in_oklab,var(--ink)_65%,transparent)]">
+        Authors revealed
+      </p>
+    );
+  }
   return (
-    <>
+    <div className="space-y-1">
       <Button size="sm" variant="outline" onClick={reveal}>Reveal authors</Button>
-      {error && <span role="alert" className="text-xs text-red-600">{error}</span>}
-    </>
+      {error && <span role="alert" className="block text-xs text-[var(--accent)] italic">{error}</span>}
+    </div>
   );
 }

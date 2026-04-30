@@ -1,7 +1,6 @@
 'use client';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { addCard } from '@/lib/rpc/addCard';
 import { editCard } from '@/lib/rpc/editCard';
 import { toToast } from '@/lib/errors';
@@ -26,13 +25,22 @@ export function CardEditor({ participantId, mode, onClose }: { participantId: st
     }
   };
   return (
-    <form onSubmit={submit} className="space-y-2">
-      <Input value={body} onChange={(e) => setBody(e.target.value)} maxLength={500} autoFocus />
+    <form onSubmit={submit} className="space-y-3">
+      <textarea
+        value={body}
+        onChange={(e) => setBody(e.target.value)}
+        maxLength={500}
+        autoFocus
+        rows={3}
+        placeholder={mode.kind === 'add' ? 'What needs to be said?' : 'Revise your card'}
+        className="input-riso resize-none"
+        style={{ fontFamily: 'var(--font-body)' }}
+      />
       <div className="flex gap-2">
         <Button type="submit" disabled={pending}>Save</Button>
         <Button type="button" variant="secondary" onClick={onClose}>Cancel</Button>
       </div>
-      {error && <p role="alert" className="text-sm text-red-600">{error}</p>}
+      {error && <p role="alert" className="text-sm text-[var(--accent)] italic">{error}</p>}
     </form>
   );
 }

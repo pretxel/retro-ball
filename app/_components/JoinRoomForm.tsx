@@ -13,13 +13,17 @@ export function JoinRoomForm({ code }: { code: string }) {
     null,
   );
   return (
-    <form action={formAction} className="grid gap-3">
-      <div className="grid gap-1">
+    <form action={formAction} className="grid gap-4">
+      <div className="grid gap-2">
         <Label htmlFor="displayName">Your name</Label>
-        <Input id="displayName" name="displayName" required maxLength={40} autoFocus />
+        <Input id="displayName" name="displayName" required maxLength={40} autoFocus placeholder="Type to introduce yourself" />
       </div>
-      <Button type="submit">Join</Button>
-      {state && !state.ok && <p role="alert" className="text-sm text-red-600">{toToast(state.code)}</p>}
+      <Button type="submit">Join the retro</Button>
+      {state && !state.ok && (
+        <p role="alert" className="text-sm text-[var(--accent)] font-medium italic">
+          {toToast(state.code)}
+        </p>
+      )}
     </form>
   );
 }

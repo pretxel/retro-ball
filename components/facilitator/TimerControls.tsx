@@ -19,12 +19,12 @@ export function TimerControls({ participantId, isFacilitator }: { participantId:
     catch (e) { setError(toToast((e as { code?: string }).code)); }
   };
   return (
-    <div className="flex items-center gap-2">
-      <Button size="sm" onClick={() => start(300)}>5m</Button>
-      <Button size="sm" onClick={() => start(600)}>10m</Button>
-      <Button size="sm" onClick={() => start(900)}>15m</Button>
+    <div className="flex items-center gap-2 flex-wrap justify-end">
+      <Button size="sm" variant="outline" onClick={() => start(300)}>5m</Button>
+      <Button size="sm" variant="outline" onClick={() => start(600)}>10m</Button>
+      <Button size="sm" variant="outline" onClick={() => start(900)}>15m</Button>
       <Button size="sm" variant="ghost" onClick={stop}>Stop</Button>
-      {error && <span role="alert" className="text-xs text-red-600">{error}</span>}
+      {error && <span role="alert" className="text-xs text-[var(--accent)] italic">{error}</span>}
     </div>
   );
 }

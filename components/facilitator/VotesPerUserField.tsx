@@ -17,10 +17,20 @@ export function VotesPerUserField({ participantId }: { participantId: string }) 
     catch (err) { setError(toToast((err as { code?: string }).code)); }
   };
   return (
-    <div className="flex items-center gap-2">
-      <Label htmlFor="vpu" className="text-sm">Votes / user</Label>
-      <Input id="vpu" type="number" min={1} max={20} defaultValue={room?.votes_per_user ?? 5} onBlur={onChange} className="w-20" />
-      {error && <span role="alert" className="text-xs text-red-600">{error}</span>}
+    <div className="space-y-1">
+      <div className="flex items-center justify-between gap-3">
+        <Label htmlFor="vpu">Votes / user</Label>
+        <Input
+          id="vpu"
+          type="number"
+          min={1}
+          max={20}
+          defaultValue={room?.votes_per_user ?? 5}
+          onBlur={onChange}
+          className="riso-mono w-20 text-center text-base font-bold"
+        />
+      </div>
+      {error && <span role="alert" className="block text-xs text-[var(--accent)] italic">{error}</span>}
     </div>
   );
 }

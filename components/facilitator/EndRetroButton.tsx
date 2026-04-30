@@ -13,9 +13,9 @@ export function EndRetroButton({ participantId }: { participantId: string }) {
     catch (e) { setError(toToast((e as { code?: string }).code)); }
   };
   return (
-    <>
-      <Button size="sm" variant="destructive" onClick={click}>End retro</Button>
-      {error && <span role="alert" className="text-xs text-red-600">{error}</span>}
-    </>
+    <div className="space-y-2">
+      <Button variant="destructive" onClick={click} className="w-full">End retro</Button>
+      {error && <span role="alert" className="block text-xs text-[var(--accent)] italic">{error}</span>}
+    </div>
   );
 }
