@@ -2,6 +2,8 @@
 import { useRoomChannel } from '@/lib/realtime/useRoomChannel';
 import { useRoomState } from '@/lib/realtime/useRoomState';
 import { Column } from './Column';
+import { Timer } from './Timer';
+import { TimerControls } from '@/components/facilitator/TimerControls';
 
 const TITLES = { mad: 'Mad', sad: 'Sad', glad: 'Glad' } as const;
 
@@ -23,8 +25,12 @@ export function Board({ roomId, viewerId }: { roomId: string; viewerId: string }
 
   return (
     <main className="min-h-screen p-6 bg-zinc-50">
-      <header className="mb-6 flex items-center justify-between">
+      <header className="mb-6 flex items-center justify-between gap-4 flex-wrap">
         <h1 className="text-xl font-semibold">Room {room.code}</h1>
+        <div className="flex items-center gap-3">
+          <Timer />
+          <TimerControls participantId={viewerId} isFacilitator={room.facilitator_id === viewerId} />
+        </div>
       </header>
       <section className="grid gap-4 md:grid-cols-3" aria-live="polite">
         {(['mad', 'sad', 'glad'] as const).map((k) => (
