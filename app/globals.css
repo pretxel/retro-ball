@@ -7,9 +7,21 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-sans);
+  --font-sans: var(--font-body);
+  --font-mono: var(--font-mono);
+  --font-heading: var(--font-display);
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --color-paper: var(--paper);
+  --color-paper-dark: var(--paper-dark);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-accent-riso: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-sticky-yellow: var(--sticky-yellow);
+  --color-sticky-peach: var(--sticky-peach);
+  --color-sticky-mint: var(--sticky-mint);
+  --color-sticky-lavender: var(--sticky-lavender);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -39,92 +51,470 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --radius-2xl: 0px;
+  --radius-3xl: 0px;
+  --radius-4xl: 0px;
 }
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
-}
+  /* Risograph palette */
+  --paper: #f3ead2;
+  --paper-dark: #e7dcb6;
+  --ink: #1e1f6b;
+  --ink-soft: #2d3097;
+  --accent: #e6422a;
+  --accent-soft: #f06a4f;
+  --noise: 0.08;
 
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  /* Sticky-note tints */
+  --sticky-yellow: #fce58a;
+  --sticky-peach: #f7c5a8;
+  --sticky-mint: #b8d8c4;
+  --sticky-lavender: #d3c2e5;
+
+  /* Shadcn token bridge — mapped onto riso palette so primitives inherit */
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --card: var(--paper);
+  --card-foreground: var(--ink);
+  --popover: var(--paper);
+  --popover-foreground: var(--ink);
+  --primary: var(--ink);
+  --primary-foreground: var(--paper);
+  --secondary: var(--paper-dark);
+  --secondary-foreground: var(--ink);
+  --muted: var(--paper-dark);
+  --muted-foreground: color-mix(in oklab, var(--ink) 70%, transparent);
+  --accent-foreground: var(--paper);
+  --destructive: var(--accent);
+  --border: var(--ink);
+  --input: var(--ink);
+  --ring: var(--accent);
+  --chart-1: var(--ink);
+  --chart-2: var(--ink-soft);
+  --chart-3: var(--accent);
+  --chart-4: var(--accent-soft);
+  --chart-5: var(--sticky-mint);
+  --radius: 0px;
+  --sidebar: var(--paper);
+  --sidebar-foreground: var(--ink);
+  --sidebar-primary: var(--ink);
+  --sidebar-primary-foreground: var(--paper);
+  --sidebar-accent: var(--paper-dark);
+  --sidebar-accent-foreground: var(--ink);
+  --sidebar-border: var(--ink);
+  --sidebar-ring: var(--accent);
 }
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border;
   }
-  body {
-    @apply bg-background text-foreground;
-  }
+
   html {
-    @apply font-sans;
+    font-family: var(--font-body), system-ui, sans-serif;
+    background: var(--paper);
+    color: var(--ink);
   }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body), system-ui, sans-serif;
+    font-feature-settings: "ss01", "ss02";
+  }
+
+  /* Riso paper grain — fixed overlay, multiplies into the page */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: var(--noise);
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    mix-blend-mode: multiply;
+  }
+
+  /* Faint paper fiber repeating texture */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background:
+      radial-gradient(circle at 20% 10%, rgba(30, 31, 107, 0.05) 0%, transparent 40%),
+      radial-gradient(circle at 80% 80%, rgba(230, 66, 42, 0.04) 0%, transparent 45%);
+    mix-blend-mode: multiply;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display), Georgia, serif;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    color: var(--ink);
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: var(--paper);
+  }
+
+  /* Body content stacks above the noise overlay */
+  main, header, footer, aside, section, nav {
+    position: relative;
+    z-index: 2;
+  }
+}
+
+/* Background blobs — soft printed circles scattered across the page */
+.riso-blobs {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.riso-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.35;
+  mix-blend-mode: multiply;
+}
+.riso-blob--1 {
+  width: 520px; height: 520px;
+  top: -180px; left: -120px;
+  background: var(--accent-soft);
+  opacity: 0.22;
+}
+.riso-blob--2 {
+  width: 460px; height: 460px;
+  top: 30%; right: -160px;
+  background: var(--ink-soft);
+  opacity: 0.18;
+}
+.riso-blob--3 {
+  width: 380px; height: 380px;
+  bottom: -120px; left: 25%;
+  background: var(--sticky-peach);
+  opacity: 0.32;
+}
+.riso-blob--4 {
+  width: 300px; height: 300px;
+  top: 55%; left: 8%;
+  background: var(--sticky-mint);
+  opacity: 0.22;
+}
+.riso-blob--5 {
+  width: 260px; height: 260px;
+  top: 12%; left: 48%;
+  background: var(--sticky-lavender);
+  opacity: 0.20;
+}
+
+/* Riso typography helpers */
+.riso-display {
+  font-family: var(--font-display), Georgia, serif;
+  font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 0.92;
+  color: var(--ink);
+}
+.riso-display--accent {
+  color: var(--accent);
+}
+.riso-display--wonk {
+  font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  font-style: italic;
+}
+.riso-mono {
+  font-family: var(--font-mono), monospace;
+  letter-spacing: 0.06em;
+}
+.riso-caps {
+  font-family: var(--font-body), sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-weight: 600;
+}
+.riso-anon {
+  font-family: var(--font-display), Georgia, serif;
+  font-style: italic;
+  font-variant-caps: small-caps;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  color: color-mix(in oklab, var(--ink) 70%, transparent);
+}
+
+/* Sticky-note tape strip used on board cards */
+.riso-tape {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  width: 64px;
+  height: 16px;
+  background: rgba(255, 248, 200, 0.7);
+  border: 1px solid rgba(30, 31, 107, 0.15);
+  transform: translateX(-50%) rotate(-3deg);
+  box-shadow: 0 1px 2px rgba(30, 31, 107, 0.1);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Hand-drawn red wavy underline used on facilitator stamp header */
+.riso-wavy {
+  display: inline-block;
+  position: relative;
+  padding-bottom: 8px;
+}
+.riso-wavy::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 8px;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 8' preserveAspectRatio='none'><path d='M0,4 Q12.5,0 25,4 T50,4 T75,4 T100,4' stroke='%23e6422a' stroke-width='2' fill='none' stroke-linecap='round'/></svg>");
+  background-repeat: repeat-x;
+  background-size: 80px 8px;
+}
+
+/* Stamped corner label (used on landing form panels) */
+.riso-stamp {
+  position: absolute;
+  top: -14px;
+  right: -14px;
+  background: var(--accent);
+  color: var(--paper);
+  padding: 0.35rem 0.75rem;
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 900;
+  font-style: italic;
+  letter-spacing: 0.08em;
+  transform: rotate(6deg);
+  box-shadow: 3px 3px 0 0 var(--ink);
+  z-index: 3;
+}
+.riso-stamp--ink {
+  background: var(--ink);
+  color: var(--paper);
+  transform: rotate(-5deg);
+  left: -14px;
+  right: auto;
+}
+
+/* Add card dashed outline button */
+.riso-add-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  border: 2px dashed var(--ink);
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--font-body), sans-serif;
+  font-weight: 600;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  cursor: pointer;
+  transition: all 0.12s ease;
+  width: 100%;
+}
+.riso-add-btn:hover {
+  background: var(--paper-dark);
+  border-style: solid;
+  transform: translate(-1px, -1px);
+}
+.riso-add-btn:active {
+  transform: translate(0, 0);
+}
+
+/* Hand-drawn checkbox */
+.riso-check {
+  position: relative;
+  width: 22px;
+  height: 22px;
+  appearance: none;
+  -webkit-appearance: none;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  cursor: pointer;
+  margin: 0;
+  flex-shrink: 0;
+  transition: background 0.12s ease;
+}
+.riso-check:checked {
+  background: var(--paper);
+}
+.riso-check:checked::after {
+  content: '';
+  position: absolute;
+  top: 1px;
+  left: 5px;
+  width: 8px;
+  height: 14px;
+  border-right: 3px solid var(--accent);
+  border-bottom: 3px solid var(--accent);
+  transform: rotate(45deg);
+}
+.riso-check:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Sticky note shell — used on board */
+.riso-sticky {
+  position: relative;
+  padding: 1.1rem 1rem 0.85rem;
+  box-shadow: 4px 4px 0 0 var(--ink);
+  border: 1.5px solid color-mix(in oklab, var(--ink) 30%, transparent);
+  transition: transform 0.14s ease, box-shadow 0.14s ease;
+}
+.riso-sticky:hover {
+  transform: translate(-2px, -2px) rotate(var(--sticky-rot, 0deg));
+  box-shadow: 6px 6px 0 0 var(--ink);
+}
+
+/* Hard-shadow panel for landing/join cards */
+.riso-panel {
+  position: relative;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  box-shadow: 8px 8px 0 0 var(--ink);
+}
+.riso-panel--accent {
+  box-shadow: 8px 8px 0 0 var(--accent);
+}
+
+/* Underline strike used for "glad" column title */
+.riso-strike {
+  position: relative;
+  display: inline-block;
+}
+.riso-strike::after {
+  content: '';
+  position: absolute;
+  left: -4%;
+  right: -4%;
+  bottom: 0.18em;
+  height: 0.18em;
+  background: var(--accent);
+  transform: rotate(-1.5deg);
+  opacity: 0.85;
+}
+
+/* Timer underline strike when running */
+.riso-timer-running {
+  position: relative;
+}
+.riso-timer-running::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0.05em;
+  height: 0.12em;
+  background: var(--accent);
+  transform: skewX(-12deg);
+}
+
+/* Riso button override (consumed by shadcn primitive via className on consumers) */
+.btn-riso {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1rem;
+  background: var(--ink);
+  color: var(--paper);
+  border: 2px solid var(--ink);
+  font-family: var(--font-body), sans-serif;
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.1s ease;
+  border-radius: 0;
+  height: auto;
+}
+.btn-riso:hover:not(:disabled) {
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 0 var(--accent);
+}
+.btn-riso:active:not(:disabled) {
+  transform: translate(0, 0);
+  box-shadow: 0 0 0 0 var(--accent);
+}
+.btn-riso:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.btn-riso--secondary {
+  background: var(--paper);
+  color: var(--ink);
+  border: 2px solid var(--ink);
+}
+.btn-riso--outline {
+  background: transparent;
+  color: var(--ink);
+  border: 2px solid var(--ink);
+}
+.btn-riso--ghost {
+  background: transparent;
+  color: var(--ink);
+  border: 2px solid transparent;
+  text-transform: none;
+  letter-spacing: 0.04em;
+}
+.btn-riso--ghost:hover:not(:disabled) {
+  background: var(--paper-dark);
+  box-shadow: none;
+  transform: translate(0, 0);
+}
+.btn-riso--destructive {
+  background: var(--accent);
+  color: var(--paper);
+  border: 2px solid var(--ink);
+}
+.btn-riso--destructive:hover:not(:disabled) {
+  box-shadow: 4px 4px 0 0 var(--ink);
+}
+.btn-riso--sm {
+  padding: 0.35rem 0.7rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+}
+
+/* Riso input — chunky border, sharp corners, big focus ring */
+.input-riso {
+  width: 100%;
+  padding: 0.65rem 0.8rem;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  color: var(--ink);
+  font-family: var(--font-body), sans-serif;
+  font-size: 1rem;
+  border-radius: 0;
+  outline: none;
+  transition: outline-offset 0.1s ease;
+}
+.input-riso::placeholder {
+  color: color-mix(in oklab, var(--ink) 50%, transparent);
+}
+.input-riso:focus-visible {
+  outline: 4px solid var(--accent);
+  outline-offset: 2px;
+}
+.input-riso:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
