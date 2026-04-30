@@ -20,10 +20,15 @@ export function Card({ card, viewerId }: { card: CardRow; viewerId: string }) {
   const total = voteTallies[card.id] ?? 0;
   const author = participants.find((p) => p.id === card.author_id);
   const showAuthor =
-    isMine ||
     !room?.anonymous_mode ||
     room.authors_revealed;
-  const authorName = showAuthor ? author?.display_name ?? '—' : 'Anonymous';
+  // In anonymous mode the author sees "You" on their own card rather than their display name,
+  // keeping the anonymous aesthetic consistent while still distinguishing ownership.
+  const authorName = showAuthor
+    ? author?.display_name ?? '—'
+    : isMine
+      ? 'You'
+      : 'Anonymous';
 
   const onVote = async () => {
     setError(null);
@@ -53,7 +58,7 @@ export function Card({ card, viewerId }: { card: CardRow; viewerId: string }) {
       <div className="flex items-center gap-2 mt-2 flex-wrap">
         <Button size="sm" variant="outline" onClick={onVote} aria-label="Add vote">+1</Button>
         <Button size="sm" variant="ghost" onClick={onUnvote} disabled={myVotesOnCard === 0} aria-label="Remove vote">-1</Button>
-        <span className="text-xs text-zinc-600" aria-label="Vote total">{total} votes</span>
+        <span role="status" className="text-xs text-zinc-600" aria-label="Vote total">{total} votes</span>
         {isMine && <Button size="sm" variant="ghost" onClick={() => setEditing(true)}>Edit</Button>}
         {(isMine || isFacilitator) && <Button size="sm" variant="ghost" onClick={onDelete}>Delete</Button>}
       </div>
