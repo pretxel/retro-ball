@@ -7,5 +7,5 @@ export async function startTimer(args: { participantId: string; seconds: number 
   const { error } = await supabase.rpc('start_timer', {
     p_participant_id: args.participantId, p_seconds: args.seconds,
   });
-  if (error) throw new RpcError(extractCode(error.message), error.message);
+  if (error) throw new RpcError(extractCode(error), error.message);
 }

@@ -5,5 +5,5 @@ import { RpcError, extractCode } from './_shared';
 export async function endRoom(args: { participantId: string }): Promise<void> {
   const supabase = getBrowserClient();
   const { error } = await supabase.rpc('end_room', { p_participant_id: args.participantId });
-  if (error) throw new RpcError(extractCode(error.message), error.message);
+  if (error) throw new RpcError(extractCode(error), error.message);
 }

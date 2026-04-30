@@ -14,6 +14,6 @@ export async function addCard(args: {
     p_column_key: args.columnKey,
     p_body: args.body,
   });
-  if (error) throw new RpcError(extractCode(error.message), error.message);
+  if (error) throw new RpcError(extractCode(error), error.message);
   return data as Card;
 }

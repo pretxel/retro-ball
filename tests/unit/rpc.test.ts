@@ -24,4 +24,19 @@ describe('addCard', () => {
     await expect(addCard({ participantId: 'p1', columnKey: 'mad', body: 'hi' }))
       .rejects.toBeInstanceOf(RpcError);
   });
+
+  it('extracts SQLSTATE check_constraint code', async () => {
+    rpcMock.mockResolvedValue({
+      data: null,
+      error: { code: '23514', message: 'check constraint violated', details: 'cards_body_check' },
+    });
+    const { addCard, RpcError } = await import('@/lib/rpc/addCard');
+    try {
+      await addCard({ participantId: 'p1', columnKey: 'mad', body: '' });
+      throw new Error('should have thrown');
+    } catch (e) {
+      expect(e).toBeInstanceOf(RpcError);
+      expect((e as RpcError).code).toBe('check_constraint');
+    }
+  });
 });

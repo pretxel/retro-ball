@@ -10,6 +10,6 @@ export async function editCard(args: { participantId: string; cardId: string; bo
     p_card_id: args.cardId,
     p_body: args.body,
   });
-  if (error) throw new RpcError(extractCode(error.message), error.message);
+  if (error) throw new RpcError(extractCode(error), error.message);
   return data as Card;
 }

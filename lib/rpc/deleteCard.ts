@@ -8,5 +8,5 @@ export async function deleteCard(args: { participantId: string; cardId: string }
     p_participant_id: args.participantId,
     p_card_id: args.cardId,
   });
-  if (error) throw new RpcError(extractCode(error.message), error.message);
+  if (error) throw new RpcError(extractCode(error), error.message);
 }

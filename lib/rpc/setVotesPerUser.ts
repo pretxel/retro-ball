@@ -7,5 +7,5 @@ export async function setVotesPerUser(args: { participantId: string; n: number }
   const { error } = await supabase.rpc('set_votes_per_user', {
     p_participant_id: args.participantId, p_n: args.n,
   });
-  if (error) throw new RpcError(extractCode(error.message), error.message);
+  if (error) throw new RpcError(extractCode(error), error.message);
 }
