@@ -51,7 +51,7 @@ export function useRoomChannel(roomId: string | null, viewerId: string | null) {
         if (status === 'SUBSCRIBED') {
           await channel.track({ participant_id: viewerId });
         }
-        if (status === 'CHANNEL_ERROR' || status === 'TIMED_OUT') {
+        if (status === 'CHANNEL_ERROR' || status === 'TIMED_OUT' || status === 'CLOSED') {
           await snapshot(); // refetch on reconnect
         }
       });
