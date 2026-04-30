@@ -57,6 +57,14 @@ Subsequent deploys happen automatically on push to `main` (preview deploys on PR
 
 See `docs/superpowers/specs/2026-04-29-retro-ball-core-realtime-board-design.md` for the full design and `docs/superpowers/plans/2026-04-29-retro-ball-core-realtime-board.md` for the implementation plan.
 
+## v1 limitations
+
+- **Anonymous mode is "polite", not security.** When anon mode is on, the UI hides author names from non-authors, but the underlying card row (including `author_id`) is still streamed via Supabase Realtime. A determined participant could read it via browser devtools. Sub-project #2 will address this via server-side broadcast channels.
+- **No authentication.** v1 uses HTTP-only cookies for participant identity. Anyone with the room code + a participant cookie can act as that participant. Tokens have a 48-hour TTL and rooms expire after 24h of inactivity.
+- **Local-clock timer.** The countdown timer uses each browser's local clock. Browsers with skewed clocks will show slightly different remaining times.
+- **Single template.** Only Mad/Sad/Glad. Custom column configurations and other formats are sub-project #3.
+- **No persistence beyond 24h.** Rooms are ephemeral. Use a screenshot for retro records.
+
 Key boundaries:
 - Components only call `lib/rpc/*`. Never import `supabase` directly.
 - Only `useRoomChannel` opens Realtime subscriptions.
