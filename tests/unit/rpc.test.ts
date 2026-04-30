@@ -1,4 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
+import type { RpcError as RpcErrorType } from '@/lib/rpc/_shared';
 
 const rpcMock = vi.fn();
 vi.mock('@/lib/supabase/browser', () => ({
@@ -36,7 +37,7 @@ describe('addCard', () => {
       throw new Error('should have thrown');
     } catch (e) {
       expect(e).toBeInstanceOf(RpcError);
-      expect((e as RpcError).code).toBe('check_constraint');
+      expect((e as RpcErrorType).code).toBe('check_constraint');
     }
   });
 });
