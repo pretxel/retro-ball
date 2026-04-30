@@ -1,0 +1,27 @@
+import { describe, it, expect, vi, beforeEach } from 'vitest';
+
+const rpcMock = vi.fn();
+vi.mock('@/lib/supabase/browser', () => ({
+  getBrowserClient: () => ({ rpc: rpcMock }),
+}));
+
+describe('addCard', () => {
+  beforeEach(() => rpcMock.mockReset());
+
+  it('calls add_card and returns row', async () => {
+    rpcMock.mockResolvedValue({ data: { id: 'c1', body: 'hi' }, error: null });
+    const { addCard } = await import('@/lib/rpc/addCard');
+    const card = await addCard({ participantId: 'p1', columnKey: 'mad', body: 'hi' });
+    expect(rpcMock).toHaveBeenCalledWith('add_card', {
+      p_participant_id: 'p1', p_column_key: 'mad', p_body: 'hi',
+    });
+    expect(card.id).toBe('c1');
+  });
+
+  it('throws RpcError with code on rejection', async () => {
+    rpcMock.mockResolvedValue({ data: null, error: { message: 'rate_limited' } });
+    const { addCard, RpcError } = await import('@/lib/rpc/addCard');
+    await expect(addCard({ participantId: 'p1', columnKey: 'mad', body: 'hi' }))
+      .rejects.toBeInstanceOf(RpcError);
+  });
+});
