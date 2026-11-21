@@ -3,6 +3,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { redirect } from 'next/navigation';
 import { CreateRoomForm } from './_components/CreateRoomForm';
+import { OtherProjects } from './_components/OtherProjects';
 
 async function joinFromLanding(formData: FormData): Promise<void> {
   'use server';
@@ -61,6 +62,8 @@ export default function HomePage() {
             </form>
           </div>
         </section>
+
+        <OtherProjects />
 
         <footer className="mt-auto pt-16 md:pt-24 text-center">
           <p className="riso-caps text-[0.65rem] text-[color-mix(in_oklab,var(--ink)_55%,transparent)]">
