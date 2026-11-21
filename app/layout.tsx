@@ -24,7 +24,7 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://retro-ball.app";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://retro-ball.pretlabs.app";
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 const SITE_NAME = "Retro Ball";
 const DESCRIPTION =
