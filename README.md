@@ -13,7 +13,7 @@ Live realtime Mad/Sad/Glad retrospective web app for agile teams.
 
 ## Local Development
 
-Prerequisites: Node 20+, pnpm 9+, Docker (for local Supabase).
+Prerequisites: Node 22+, pnpm 9+, Docker (for local Supabase).
 
 ```bash
 pnpm install
@@ -70,4 +70,3 @@ Key boundaries:
 - Only `useRoomChannel` opens Realtime subscriptions.
 - Postgres RPCs are the single mutation surface — RLS denies direct table writes.
 - `lib/identity.ts` is the only owner of the participant cookie.
-

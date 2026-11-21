@@ -1,4 +1,4 @@
-// .mts extension is intentional. Vitest 4 + Vite 8 bundle Rolldown for worker
+// .mts extension is intentional. Vitest + Vite 8 bundle Rolldown for worker
 // threads which require ESM loading. Renaming to .ts breaks the runner since
 // package.json has no "type": "module" (Next.js requires CJS for its configs).
 import { defineConfig } from 'vitest/config';
@@ -7,7 +7,7 @@ import path from 'node:path';
 
 export default defineConfig({
   plugins: [react()],
-  resolve: { alias: { '@': path.resolve(__dirname, '.') } },
+  resolve: { alias: { '@': path.resolve(import.meta.dirname, '.') } },
   test: {
     environment: 'jsdom',
     setupFiles: ['./tests/unit/setup.ts'],
