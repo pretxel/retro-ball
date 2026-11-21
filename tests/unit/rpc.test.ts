@@ -13,7 +13,7 @@ describe('addCard', () => {
     rpcMock.mockResolvedValue({ data: { id: 'c1', body: 'hi' }, error: null });
     const { addCard } = await import('@/lib/rpc/addCard');
     const card = await addCard({ participantId: 'p1', columnKey: 'mad', body: 'hi' });
-    expect(rpcMock).toHaveBeenCalledWith('add_card', {
+    expect(rpcMock).toHaveBeenCalledWith('rb_add_card', {
       p_participant_id: 'p1', p_column_key: 'mad', p_body: 'hi',
     });
     expect(card.id).toBe('c1');

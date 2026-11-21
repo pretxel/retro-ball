@@ -12,7 +12,7 @@ export default async function BoardPage({ params }: { params: Promise<{ code: st
 
   const supabase = await getServerClient();
   const { data: rooms, error } = await supabase
-    .from('rooms')
+    .from('rb_rooms')
     .select('id, code, ended_at')
     .eq('code', code)
     .limit(1);
@@ -21,7 +21,7 @@ export default async function BoardPage({ params }: { params: Promise<{ code: st
 
   // Verify cookie matches a participant in this room
   const { data: parts } = await supabase
-    .from('participants')
+    .from('rb_participants')
     .select('id')
     .eq('id', participantId)
     .eq('room_id', room.id);

@@ -10,7 +10,7 @@ export async function createRoomAction(_prev: ActionResult | null, formData: For
   const displayName = String(formData.get('displayName') ?? '').trim();
   if (!displayName) return { ok: false, code: 'display_name_required' };
   const supabase = await getServerClient();
-  const { data, error } = await supabase.rpc('create_room', { p_display_name: displayName });
+  const { data, error } = await supabase.rpc('rb_create_room', { p_display_name: displayName });
   if (error || !data?.[0]) return { ok: false, code: error?.message ?? 'create_failed' };
   const { code, participant_id } = data[0];
   const c = await cookies();

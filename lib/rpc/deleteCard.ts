@@ -4,7 +4,7 @@ import { RpcError, extractCode } from './_shared';
 
 export async function deleteCard(args: { participantId: string; cardId: string }): Promise<void> {
   const supabase = getBrowserClient();
-  const { error } = await supabase.rpc('delete_card', {
+  const { error } = await supabase.rpc('rb_delete_card', {
     p_participant_id: args.participantId,
     p_card_id: args.cardId,
   });

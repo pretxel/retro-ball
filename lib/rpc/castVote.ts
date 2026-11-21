@@ -4,7 +4,7 @@ import { RpcError, extractCode } from './_shared';
 
 export async function castVote(args: { participantId: string; cardId: string }): Promise<void> {
   const supabase = getBrowserClient();
-  const { error } = await supabase.rpc('cast_vote', {
+  const { error } = await supabase.rpc('rb_cast_vote', {
     p_participant_id: args.participantId, p_card_id: args.cardId,
   });
   if (error) throw new RpcError(extractCode(error), error.message);

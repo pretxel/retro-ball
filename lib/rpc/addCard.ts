@@ -9,7 +9,7 @@ export async function addCard(args: {
   participantId: string; columnKey: 'mad' | 'sad' | 'glad'; body: string;
 }): Promise<Card> {
   const supabase = getBrowserClient();
-  const { data, error } = await supabase.rpc('add_card', {
+  const { data, error } = await supabase.rpc('rb_add_card', {
     p_participant_id: args.participantId,
     p_column_key: args.columnKey,
     p_body: args.body,

@@ -34,7 +34,7 @@ export type Database = {
   }
   public: {
     Tables: {
-      cards: {
+      rb_cards: {
         Row: {
           author_id: string
           body: string
@@ -64,22 +64,22 @@ export type Database = {
         }
         Relationships: [
           {
-            foreignKeyName: "cards_author_id_fkey"
+            foreignKeyName: "rb_cards_author_id_fkey"
             columns: ["author_id"]
             isOneToOne: false
-            referencedRelation: "participants"
+            referencedRelation: "rb_participants"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "cards_room_id_fkey"
+            foreignKeyName: "rb_cards_room_id_fkey"
             columns: ["room_id"]
             isOneToOne: false
-            referencedRelation: "rooms"
+            referencedRelation: "rb_rooms"
             referencedColumns: ["id"]
           },
         ]
       }
-      participants: {
+      rb_participants: {
         Row: {
           display_name: string
           id: string
@@ -106,15 +106,15 @@ export type Database = {
         }
         Relationships: [
           {
-            foreignKeyName: "participants_room_id_fkey"
+            foreignKeyName: "rb_participants_room_id_fkey"
             columns: ["room_id"]
             isOneToOne: false
-            referencedRelation: "rooms"
+            referencedRelation: "rb_rooms"
             referencedColumns: ["id"]
           },
         ]
       }
-      rooms: {
+      rb_rooms: {
         Row: {
           anonymous_mode: boolean
           authors_revealed: boolean
@@ -159,15 +159,15 @@ export type Database = {
         }
         Relationships: [
           {
-            foreignKeyName: "rooms_facilitator_fk"
+            foreignKeyName: "rb_rooms_facilitator_fk"
             columns: ["facilitator_id"]
             isOneToOne: false
-            referencedRelation: "participants"
+            referencedRelation: "rb_participants"
             referencedColumns: ["id"]
           },
         ]
       }
-      votes: {
+      rb_votes: {
         Row: {
           card_id: string
           created_at: string
@@ -191,24 +191,24 @@ export type Database = {
         }
         Relationships: [
           {
-            foreignKeyName: "votes_card_id_fkey"
+            foreignKeyName: "rb_votes_card_id_fkey"
             columns: ["card_id"]
             isOneToOne: false
-            referencedRelation: "cards"
+            referencedRelation: "rb_cards"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "votes_room_id_fkey"
+            foreignKeyName: "rb_votes_room_id_fkey"
             columns: ["room_id"]
             isOneToOne: false
-            referencedRelation: "rooms"
+            referencedRelation: "rb_rooms"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "votes_voter_id_fkey"
+            foreignKeyName: "rb_votes_voter_id_fkey"
             columns: ["voter_id"]
             isOneToOne: false
-            referencedRelation: "participants"
+            referencedRelation: "rb_participants"
             referencedColumns: ["id"]
           },
         ]
@@ -256,25 +256,25 @@ export type Database = {
       }
     }
     Functions: {
-      _bump_activity: { Args: { p_room_id: string }; Returns: undefined }
+      _rb_bump_activity: { Args: { p_room_id: string }; Returns: undefined }
       _cleanup: { Args: never; Returns: boolean }
       _contract_on: { Args: { "": string }; Returns: unknown }
       _currtest: { Args: never; Returns: number }
       _db_privs: { Args: never; Returns: unknown[] }
       _extensions: { Args: never; Returns: unknown[] }
-      _generate_room_code: { Args: never; Returns: string }
+      _rb_generate_room_code: { Args: never; Returns: string }
       _get: { Args: { "": string }; Returns: number }
       _get_latest: { Args: { "": string }; Returns: number[] }
       _get_note: { Args: { "": string }; Returns: string }
-      _is_facilitator: { Args: { p_pid: string }; Returns: boolean }
+      _rb_is_facilitator: { Args: { p_pid: string }; Returns: boolean }
       _is_verbose: { Args: never; Returns: boolean }
-      _participant_in_room: {
+      _rb_participant_in_room: {
         Args: { p_pid: string; p_room_id: string }
         Returns: boolean
       }
       _prokind: { Args: { p_oid: unknown }; Returns: unknown }
       _query: { Args: { "": string }; Returns: string }
-      _rate_limit_check: {
+      _rb_rate_limit_check: {
         Args: {
           p_action: string
           p_limit: number
@@ -284,12 +284,12 @@ export type Database = {
         Returns: undefined
       }
       _refine_vol: { Args: { "": string }; Returns: string }
-      _room_active: { Args: { p_room_id: string }; Returns: boolean }
-      _room_for_participant: { Args: { p_pid: string }; Returns: string }
+      _rb_room_active: { Args: { p_room_id: string }; Returns: boolean }
+      _rb_room_for_participant: { Args: { p_pid: string }; Returns: string }
       _table_privs: { Args: never; Returns: unknown[] }
       _temptypes: { Args: { "": string }; Returns: string }
       _todo: { Args: never; Returns: string }
-      add_card: {
+      rb_add_card: {
         Args: { p_body: string; p_column_key: string; p_participant_id: string }
         Returns: {
           author_id: string
@@ -302,12 +302,12 @@ export type Database = {
         }
         SetofOptions: {
           from: "*"
-          to: "cards"
+          to: "rb_cards"
           isOneToOne: true
           isSetofReturn: false
         }
       }
-      cards_visible: {
+      rb_cards_visible: {
         Args: { p_viewer_id: string }
         Returns: {
           author_id: string
@@ -319,7 +319,7 @@ export type Database = {
           updated_at: string
         }[]
       }
-      cast_vote: {
+      rb_cast_vote: {
         Args: { p_card_id: string; p_participant_id: string }
         Returns: {
           card_id: string
@@ -330,7 +330,7 @@ export type Database = {
         }
         SetofOptions: {
           from: "*"
-          to: "votes"
+          to: "rb_votes"
           isOneToOne: true
           isSetofReturn: false
         }
@@ -371,7 +371,7 @@ export type Database = {
             }
             Returns: string
           }
-      create_room: {
+      rb_create_room: {
         Args: { p_display_name: string }
         Returns: {
           code: string
@@ -379,7 +379,7 @@ export type Database = {
           room_id: string
         }[]
       }
-      delete_card: {
+      rb_delete_card: {
         Args: { p_card_id: string; p_participant_id: string }
         Returns: undefined
       }
@@ -400,7 +400,7 @@ export type Database = {
       do_tap:
         | { Args: never; Returns: string[] }
         | { Args: { "": string }; Returns: string[] }
-      edit_card: {
+      rb_edit_card: {
         Args: { p_body: string; p_card_id: string; p_participant_id: string }
         Returns: {
           author_id: string
@@ -413,18 +413,18 @@ export type Database = {
         }
         SetofOptions: {
           from: "*"
-          to: "cards"
+          to: "rb_cards"
           isOneToOne: true
           isSetofReturn: false
         }
       }
-      end_room: { Args: { p_participant_id: string }; Returns: undefined }
+      rb_end_room: { Args: { p_participant_id: string }; Returns: undefined }
       fail:
         | { Args: never; Returns: string }
         | { Args: { "": string }; Returns: string }
       findfuncs: { Args: { "": string }; Returns: string[] }
       finish: { Args: { exception_on_failure?: boolean }; Returns: string[] }
-      get_room_state: {
+      rb_get_room_state: {
         Args: { p_room_id: string; p_viewer_id?: string }
         Returns: {
           cards: Json
@@ -437,7 +437,7 @@ export type Database = {
       in_todo: { Args: never; Returns: boolean }
       is_empty: { Args: { "": string }; Returns: string }
       isnt_empty: { Args: { "": string }; Returns: string }
-      join_room: {
+      rb_join_room: {
         Args: { p_code: string; p_display_name: string }
         Returns: {
           participant_id: string
@@ -454,31 +454,31 @@ export type Database = {
       pg_version: { Args: never; Returns: string }
       pg_version_num: { Args: never; Returns: number }
       pgtap_version: { Args: never; Returns: number }
-      purge_stale_rooms: { Args: never; Returns: number }
-      reveal_authors: { Args: { p_participant_id: string }; Returns: undefined }
-      revoke_vote: {
+      rb_purge_stale_rooms: { Args: never; Returns: number }
+      rb_reveal_authors: { Args: { p_participant_id: string }; Returns: undefined }
+      rb_revoke_vote: {
         Args: { p_card_id: string; p_participant_id: string }
         Returns: undefined
       }
       runtests:
         | { Args: never; Returns: string[] }
         | { Args: { "": string }; Returns: string[] }
-      set_anonymous_mode: {
+      rb_set_anonymous_mode: {
         Args: { p_on: boolean; p_participant_id: string }
         Returns: undefined
       }
-      set_votes_per_user: {
+      rb_set_votes_per_user: {
         Args: { p_n: number; p_participant_id: string }
         Returns: undefined
       }
       skip:
         | { Args: { "": string }; Returns: string }
         | { Args: { how_many: number; why: string }; Returns: string }
-      start_timer: {
+      rb_start_timer: {
         Args: { p_participant_id: string; p_seconds: number }
         Returns: undefined
       }
-      stop_timer: { Args: { p_participant_id: string }; Returns: undefined }
+      rb_stop_timer: { Args: { p_participant_id: string }; Returns: undefined }
       throws_ok: { Args: { "": string }; Returns: string }
       todo:
         | { Args: { how_many: number }; Returns: boolean[] }

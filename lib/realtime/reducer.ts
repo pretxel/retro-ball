@@ -1,9 +1,9 @@
 import type { Database } from '@/lib/supabase/types';
 
-export type Room = Database['public']['Tables']['rooms']['Row'];
-export type Participant = Database['public']['Tables']['participants']['Row'];
-export type Card = Database['public']['Tables']['cards']['Row'];
-export type Vote = Database['public']['Tables']['votes']['Row'];
+export type Room = Database['public']['Tables']['rb_rooms']['Row'];
+export type Participant = Database['public']['Tables']['rb_participants']['Row'];
+export type Card = Database['public']['Tables']['rb_cards']['Row'];
+export type Vote = Database['public']['Tables']['rb_votes']['Row'];
 
 export type RoomState = {
   room: Room | null;
