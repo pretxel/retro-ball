@@ -1,10 +1,9 @@
 'use server';
-import { redirect } from 'next/navigation';
 import { cookies } from 'next/headers';
 import { getServerClient } from '@/lib/supabase/server';
 import { COOKIE_NAME } from '@/lib/identity';
 
-export type ActionResult = { ok: true } | { ok: false; code: string };
+export type ActionResult = { ok: true; redirectTo: string } | { ok: false; code: string };
 
 export async function createRoomAction(_prev: ActionResult | null, formData: FormData): Promise<ActionResult> {
   const displayName = String(formData.get('displayName') ?? '').trim();
@@ -21,5 +20,5 @@ export async function createRoomAction(_prev: ActionResult | null, formData: For
     secure: true,
     maxAge: 60 * 60 * 48,
   });
-  redirect(`/r/${code}`);
+  return { ok: true, redirectTo: `/r/${code}` };
 }

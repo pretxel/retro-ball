@@ -9,7 +9,11 @@ import { toToast } from '@/lib/errors';
 
 export function JoinRoomForm({ code }: { code: string }) {
   const [state, formAction] = useActionState<ActionResult | null, FormData>(
-    (prev, formData) => joinRoomAction(code, prev, formData),
+    async (previousState, formData) => {
+      const result = await joinRoomAction(code, previousState, formData);
+      if (result.ok) window.location.assign(result.redirectTo);
+      return result;
+    },
     null,
   );
   return (

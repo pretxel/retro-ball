@@ -7,7 +7,11 @@ import { createRoomAction, type ActionResult } from '@/lib/rpc/createRoom';
 import { toToast } from '@/lib/errors';
 
 export function CreateRoomForm() {
-  const [state, formAction] = useActionState<ActionResult | null, FormData>(createRoomAction, null);
+  const [state, formAction] = useActionState<ActionResult | null, FormData>(async (previousState, formData) => {
+    const result = await createRoomAction(previousState, formData);
+    if (result.ok) window.location.assign(result.redirectTo);
+    return result;
+  }, null);
   return (
     <form action={formAction} className="grid gap-4">
       <div className="grid gap-2">

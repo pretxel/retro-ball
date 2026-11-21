@@ -1,5 +1,4 @@
 'use server';
-import { redirect } from 'next/navigation';
 import { cookies } from 'next/headers';
 import { getServerClient } from '@/lib/supabase/server';
 import { COOKIE_NAME } from '@/lib/identity';
@@ -20,5 +19,5 @@ export async function joinRoomAction(code: string, _prev: ActionResult | null, f
     secure: true,
     maxAge: 60 * 60 * 48,
   });
-  redirect(`/r/${code}`);
+  return { ok: true, redirectTo: `/r/${code}` };
 }
