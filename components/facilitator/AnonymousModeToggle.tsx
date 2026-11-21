@@ -2,15 +2,30 @@
 import { setAnonymousMode } from '@/lib/rpc/setAnonymousMode';
 import { useRoomState } from '@/lib/realtime/useRoomState';
 import { toToast } from '@/lib/errors';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 export function AnonymousModeToggle({ participantId }: { participantId: string }) {
   const { room } = useRoomState();
   const serverValue = room?.anonymous_mode ?? false;
+
+  return (
+    <AnonymousModeToggleControl
+      key={String(serverValue)}
+      participantId={participantId}
+      serverValue={serverValue}
+    />
+  );
+}
+
+function AnonymousModeToggleControl({
+  participantId,
+  serverValue,
+}: {
+  participantId: string;
+  serverValue: boolean;
+}) {
   const [optimistic, setOptimistic] = useState(serverValue);
   const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => { setOptimistic(serverValue); }, [serverValue]);
 
   const onChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const next = e.target.checked;

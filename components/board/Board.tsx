@@ -1,4 +1,5 @@
 'use client';
+import Link from 'next/link';
 import { useRoomChannel } from '@/lib/realtime/useRoomChannel';
 import { useRoomState } from '@/lib/realtime/useRoomState';
 import { Column } from './Column';
@@ -31,12 +32,12 @@ export function Board({ roomId, viewerId }: { roomId: string; viewerId: string }
           <p className="text-sm italic mb-6 text-[color-mix(in_oklab,var(--ink)_70%,transparent)]">
             The room is closed. Thanks for showing up honestly.
           </p>
-          <a
+          <Link
             className="btn-riso"
             href="/"
           >
             Start a new one
-          </a>
+          </Link>
         </div>
       </main>
     );

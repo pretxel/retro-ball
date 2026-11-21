@@ -3,11 +3,13 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { addCard } from '@/lib/rpc/addCard';
 import { editCard } from '@/lib/rpc/editCard';
+import { useRoomStore } from '@/lib/realtime/store';
 import { toToast } from '@/lib/errors';
 
 type Mode = { kind: 'add'; columnKey: 'mad' | 'sad' | 'glad' } | { kind: 'edit'; cardId: string; initial: string };
 
 export function CardEditor({ participantId, mode, onClose }: { participantId: string; mode: Mode; onClose: () => void }) {
+  const dispatch = useRoomStore((state) => state.dispatch);
   const [body, setBody] = useState(mode.kind === 'edit' ? mode.initial : '');
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
@@ -16,8 +18,13 @@ export function CardEditor({ participantId, mode, onClose }: { participantId: st
     if (!body.trim()) return;
     setPending(true); setError(null);
     try {
-      if (mode.kind === 'add') await addCard({ participantId, columnKey: mode.columnKey, body: body.trim() });
-      else await editCard({ participantId, cardId: mode.cardId, body: body.trim() });
+      if (mode.kind === 'add') {
+        const card = await addCard({ participantId, columnKey: mode.columnKey, body: body.trim() });
+        dispatch({ kind: 'card_insert', card });
+      } else {
+        const card = await editCard({ participantId, cardId: mode.cardId, body: body.trim() });
+        dispatch({ kind: 'card_update', card });
+      }
       onClose();
     } catch (e) {
       setError(toToast((e as { code?: string }).code));
